@@ -4,12 +4,21 @@ require('dotenv').config()
 
 const password = process.env.MONGODB_PASSWORD;
 
-const mongoURI = "mongodb+srv://badal:" + password + "@cluster0.r1bmdeb.mongodb.net/?retryWrites=true&w=majority";
+//url to connect the database
+const mongoURI = "mongodb+srv://badal:" + password + "@cluster0.r1bmdeb.mongodb.net/Foody?retryWrites=true&w=majority";
 
 const mongoDB = async () => {
-    await mongoose.connect(mongoURI).then(() => {
-        console.log("MongoDB connected Successfully");
-    });
+    try {
+        await mongoose.connect(mongoURI).then(async () => { //connect the database
+            console.log("MongoDB connected Successfully");
+            const fetched_data = mongoose.connection.db.collection("foodItems"); //fetch the records from the database
+            const data = await fetched_data.find({}).toArray();
+            // console.log(data);
+        });
+    } catch (err) {
+        console.log(err);
+    }
+
 }
 
 module.exports = mongoDB;
