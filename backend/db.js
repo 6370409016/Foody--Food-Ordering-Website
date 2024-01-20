@@ -11,9 +11,16 @@ const mongoDB = async () => {
     try {
         await mongoose.connect(mongoURI).then(async () => { //connect the database
             console.log("MongoDB connected Successfully");
-            const fetched_data = mongoose.connection.db.collection("foodItems"); //fetch the records from the database
-            const data = await fetched_data.find({}).toArray();
-            // console.log(data);
+            const fetched_data = await mongoose.connection.db.collection("foodItems"); //fetch the records from the database
+            const foodItemData = await fetched_data.find({}).toArray();
+
+            const foodCatagory = await mongoose.connection.db.collection("foodCatagory");
+            const foodCatagoryData = await foodCatagory.find({}).toArray();
+
+            global.foodItems = foodItemData;
+            global.foodCatagory = foodCatagoryData;
+
+
         });
     } catch (err) {
         console.log(err);
