@@ -51,12 +51,7 @@ export default function Home() {
                     setSearch(e.target.value);
                   }}
                 />
-                {/* <button
-                  className="btn btn-outline-success text-white bg-dark"
-                  type="submit"
-                >
-                  Search
-                </button> */}
+
               </div>
             </div>
             <div className="carousel-item active">
@@ -128,8 +123,9 @@ export default function Home() {
                           className="col-12 col-md-6 col-lg-3"
                         >
                           <Card
-                            foodName={filterItems.name}
-                            foodImg={filterItems.img}
+                            // foodName={filterItems.name}
+                            // foodImg={filterItems.img}
+                            foodItems={filterItems}
                             options={filterItems.options[0]}
                           />
                         </div>

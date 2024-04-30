@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -21,24 +27,56 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+            <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/">
+                <Link
+                  className="nav-link active fs-5"
+                  aria-current="page"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
+              {localStorage.getItem("authToken") ? (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active fs-5"
+                    aria-current="page"
+                    to="/"
+                  >
+                    My Order
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+            {localStorage.getItem("authToken") ? (
+              <div style={{ display: "flex", marginRight: "5%", width: "10%" }}>
+                <div className="btn bg-white text-success mx-2 " to="/">
+                  Cart
+                </div>
+                <div
+                  className="btn bg-white text-danger mx-2 "
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: "flex", marginRight: "5%", width: "20%" }}>
+                <Link className="btn bg-white text-success mx-2 " to="/login">
                   Login
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/creatuser">
+
+                <Link
+                  className="btn bg-white text-success mx-2"
+                  to="/creatuser"
+                >
                   Signup
                 </Link>
-              </li>
-            
-            </ul>
+              </div>
+            )}
           </div>
         </div>
       </nav>
