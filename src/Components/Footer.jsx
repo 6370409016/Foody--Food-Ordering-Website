@@ -12,7 +12,7 @@ export default function Footer() {
           <li className="nav-item"><Link href="/" className="nav-link px-2 text-muted">FAQs</Link></li>
           <li className="nav-item"><Link href="/" className="nav-link px-2 text-muted">About</Link></li>
         </ul>
-        <p className="text-center text-muted">© 2023 Foody, Inc</p>
+        <p className="text-center text-muted">© 2024 Foody, Inc</p>
       </footer>
     </div>
   )
